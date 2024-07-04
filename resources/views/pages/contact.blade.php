@@ -1,3 +1,3 @@
-<x-layout>
+<x-layouts.main>
     
-</x-layout>
+</x-layouts.main>
