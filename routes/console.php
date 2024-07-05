@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Schedule;
 //     $this->comment(Inspiring::quote());->dailyAt('07:00');
 // })->purpose('Display an inspiring quote')->everyMinute();
 
-Schedule::command('app:send-birthday-emails')->dailyAt('07:00');
+Schedule::command('app:send-emails')->dailyAt('07:00');

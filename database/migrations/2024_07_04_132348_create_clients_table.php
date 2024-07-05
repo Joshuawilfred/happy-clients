@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->date('birthday');
+            $table->boolean('email_sent')->default(false);
             $table->timestamps();
         });
     }

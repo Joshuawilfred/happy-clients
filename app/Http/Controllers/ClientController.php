@@ -11,7 +11,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::latest()->simplePaginate(10);
+        $clients = Client::latest()->get();
         return view('pages/clients.index', [
             'clients' => $clients
         ]);

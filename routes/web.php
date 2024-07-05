@@ -1,12 +1,30 @@
 <?php
 
 use App\Http\Controllers\ClientController;
-use App\Mail\BirthdayEmail;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\HolidayController;
+use App\Models\Client;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('app');
+    $clients = Client::whereMonth('birthday', now()->month)
+        ->latest()
+        ->get();
+
+    $sortedClients = $clients->sortBy(function ($client) {
+        return Carbon::parse($client->birthday)->day;
+    });
+    return view('app', [
+        'clients' =>  $sortedClients->map(function ($client) {
+            return (object) [
+                'id' => $client->id,
+                'name' => $client->name,
+                'email' => $client->email,
+                'birthday' =>  Carbon::parse($client->birthday)->format('F, d'),
+                'email_sent' => $client->email_sent,
+            ];
+        })
+    ]);
 });
 
 Route::get('/about', function () {
@@ -29,3 +47,4 @@ Route::get('/contact', function () {
     return view('pages/contact');
 });
 
+Route::resource('holidays', HolidayController::class);
