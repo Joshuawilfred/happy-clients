@@ -1,19 +1,41 @@
 <x-layouts.main>
     <div>
         <div class="flex justify-between m-2 items-center">
-            <span>Registered Clients</span>
+            <span class="text-kichwa-cha-habari">Registered Clients</span>
             <a href="/clients/create" class="bg-primary font-bold rounded-md p-2 float-right text-white">Add new</a>
         </div>
-        <div class="grid gap-4">
-            @foreach ($clients as $client)
-                <a href="/clients/{{ $client['id'] }}"
-                    class="hover:bg-secondary px-4 py-6 border border-border rounded-md">
-                    <div class="font-bold text-primary text-sm">{{ $client->name }}</div>
-                    <div>
-                        <i class="bg-secondary px-1 rounded text-xs">{{ $client['email'] }}</i> Was born in : {{ $client['birthday'] }}
-                    </div>
-                </a>
-            @endforeach
-        </div>
+        <x-tables.table>
+            <x-tables.head>
+                <x-tables.row>
+                    <x-tables.heading>Name</x-tables.heading>
+                    <x-tables.heading>Email</x-tables.heading>
+                    <x-tables.heading>Birthday</x-tables.heading>
+                    <x-tables.heading>Action</x-tables.heading>
+                </x-tables.row>
+            </x-tables.head>
+            <x-tables.body>
+                @foreach ($clients as $client)
+                    <x-tables.row>
+                        <x-tables.data>
+                            <span class="font-bold text-primary text-sm">{{ $client->name }}</span>
+                        </x-tables.data>
+
+                        <x-tables.data>
+                            {{ $client->email }}
+                        </x-tables.data>
+
+                        <x-tables.data>
+                            {{ $client->birthday }}
+                        </x-tables.data>
+
+                        <x-tables.data>
+                            <a href="clients/{{ $client->id }}">
+                                <x-buttons.neutral-btn>View</x-buttons.neutral-btn>
+                            </a>
+                        </x-tables.data>
+                    </x-tables.row>
+                @endforeach
+            </x-tables.body>
+        </x-tables.table>
     </div>
 </x-layouts.main>

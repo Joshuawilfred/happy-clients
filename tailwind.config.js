@@ -48,6 +48,10 @@ export default {
             fontFamily: {
                 "hanken-grotesk": ["Hanken Grotesk", "sans-serif"]
             },
+            fontSize: {
+                "2xs": ".625rem", // 10px
+                "kichwa-cha-habari": "1.3rem"
+            },
             borderRadius: {
                 DEFAULT: "var(--radius)",
             },
