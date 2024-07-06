@@ -14,31 +14,35 @@
                 </x-tables.row>
             </x-tables.head>
             <x-tables.body>
-                @foreach ($holidays as $holiday)
-                    <x-tables.row>
-                        <x-tables.data>{{ $holiday->name }}</x-tables.data>
-                        <x-tables.data>{{ $holiday->date }}</x-tables.data>
-                        <x-tables.data>
-                            <div class="flex gap-4">
-                                <a href="{{ route('holidays.edit', $holiday) }}">
-                                    <x-buttons.neutral-btn>
-                                        Edit
-                                    </x-buttons.neutral-btn>
-                                </a>
-                                <form action="{{ route('holidays.destroy', $holiday) }}" method="POST"
-                                    style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-buttons.danger-btn>
-                                        <button type="submit">
-                                            Delete
-                                        </button>
-                                    </x-buttons.danger-btn>
-                                </form>
-                            </div>
-                        </x-tables.data>
-                    </x-tables.row>
-                @endforeach
+                @if ($holidays->isNotEmpty())
+                    @foreach ($holidays as $holiday)
+                        <x-tables.row>
+                            <x-tables.cell>{{ $holiday->name }}</x-tables.cell>
+                            <x-tables.cell>{{ $holiday->date }}</x-tables.cell>
+                            <x-tables.cell>
+                                <div class="flex gap-4">
+                                    <a href="{{ route('holidays.edit', $holiday) }}">
+                                        <x-buttons.neutral-btn>
+                                            Edit
+                                        </x-buttons.neutral-btn>
+                                    </a>
+                                    <form action="{{ route('holidays.destroy', $holiday) }}" method="POST"
+                                        style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-buttons.danger-btn>
+                                            <button type="submit">
+                                                Delete
+                                            </button>
+                                        </x-buttons.danger-btn>
+                                    </form>
+                                </div>
+                            </x-tables.cell>
+                        </x-tables.row>
+                    @endforeach
+                @else
+                    <x-tables.empty-table tittle="No Holiday" message="Create a holiday to get started" />
+                @endif
             </x-tables.body>
         </x-tables.table>
     </div>

@@ -12,29 +12,33 @@
                     </x-tables.row>
                 </x-tables.head>
                 <x-tables.body>
-                    @foreach ($clients as $client)
-                        <x-tables.row>
-                            <x-tables.data>
-                                <span class="font-bold text-primary text-sm">{{ $client->name }}</span>
-                            </x-tables.data>
+                    @if ($clients->isNotEmpty())
+                        @foreach ($clients as $client)
+                            <x-tables.row>
+                                <x-tables.cell>
+                                    <span class="font-bold text-primary text-sm">{{ $client->name }}</span>
+                                </x-tables.cell>
 
-                            <x-tables.data>
-                                {{ $client->email }}
-                            </x-tables.data>
+                                <x-tables.cell>
+                                    {{ $client->email }}
+                                </x-tables.cell>
 
-                            <x-tables.data>
-                                {{ $client->birthday }}
-                            </x-tables.data>
+                                <x-tables.cell>
+                                    {{ $client->birthday }}
+                                </x-tables.cell>
 
-                            <x-tables.data>
-                                @if ($client->email_sent === 0)
-                                    <x-buttons.danger-btn> Not Sent </x-buttons.danger-btn>
-                                @else
-                                    <x-buttons.success-btn> Sent</x-buttons.success-btn>
-                                @endif
-                            </x-tables.data>
-                        </x-tables.row>
-                    @endforeach
+                                <x-tables.cell>
+                                    @if ($client->email_sent === 0)
+                                        <x-buttons.danger-btn> Not Sent </x-buttons.danger-btn>
+                                    @else
+                                        <x-buttons.success-btn> Sent</x-buttons.success-btn>
+                                    @endif
+                                </x-tables.cell>
+                            </x-tables.row>
+                        @endforeach
+                    @else
+                        <x-tables.empty-table tittle="All Good" message="No Upcoming Birthdays" />
+                    @endif
                 </x-tables.body>
             </x-tables.table>
         </div>
@@ -54,28 +58,31 @@
                     </x-tables.row>
                 </x-tables.head>
                 <x-tables.body>
-                    @foreach ($holidays as $holiday)
-                        <x-tables.row>
-                            <x-tables.data>
-                                <span class="font-bold text-primary text-sm">{{ $holiday->name }}</span>
-                            </x-tables.data>
+                    @if ($holidays->isNotEmpty())
+                        @foreach ($holidays as $holiday)
+                            <x-tables.row>
+                                <x-tables.cell>
+                                    <span class="font-bold text-primary text-sm">{{ $holiday->name }}</span>
+                                </x-tables.cell>
 
-                            <x-tables.data>
-                                {{ $holiday->date }}
-                            </x-tables.data>
+                                <x-tables.cell>
+                                    {{ $holiday->date }}
+                                </x-tables.cell>
 
-                            <x-tables.data>
-                                @if (2 + 2 == 0)
-                                    <x-buttons.danger-btn> Not Sent </x-buttons.danger-btn>
-                                @else
-                                    <x-buttons.success-btn> Sent</x-buttons.success-btn>
-                                @endif
-                            </x-tables.data>
-                        </x-tables.row>
-                    @endforeach
+                                <x-tables.cell>
+                                    @if (2 + 2 == 0)
+                                        <x-buttons.danger-btn> Not Sent </x-buttons.danger-btn>
+                                    @else
+                                        <x-buttons.success-btn> Sent</x-buttons.success-btn>
+                                    @endif
+                                </x-tables.cell>
+                            </x-tables.row>
+                        @endforeach
+                    @else
+                        <x-tables.empty-table tittle="No Holidays" message="No Upcoming Holidays" />
+                    @endif
                 </x-tables.body>
             </x-tables.table>
         </div>
     </section>
 </x-layouts.main>
-<x-layouts.footer />

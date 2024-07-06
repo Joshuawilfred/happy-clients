@@ -14,27 +14,31 @@
                 </x-tables.row>
             </x-tables.head>
             <x-tables.body>
-                @foreach ($clients as $client)
-                    <x-tables.row>
-                        <x-tables.data>
-                            <span class="font-bold text-primary text-sm">{{ $client->name }}</span>
-                        </x-tables.data>
+                @if ($clients->isNotEmpty())
+                    @foreach ($clients as $client)
+                        <x-tables.row>
+                            <x-tables.cell>
+                                <span class="font-bold text-primary text-sm">{{ $client->name }}</span>
+                            </x-tables.cell>
 
-                        <x-tables.data>
-                            {{ $client->email }}
-                        </x-tables.data>
+                            <x-tables.cell>
+                                {{ $client->email }}
+                            </x-tables.cell>
 
-                        <x-tables.data>
-                            {{ $client->birthday }}
-                        </x-tables.data>
+                            <x-tables.cell>
+                                {{ $client->birthday }}
+                            </x-tables.cell>
 
-                        <x-tables.data>
-                            <a href="clients/{{ $client->id }}">
-                                <x-buttons.neutral-btn>View</x-buttons.neutral-btn>
-                            </a>
-                        </x-tables.data>
-                    </x-tables.row>
-                @endforeach
+                            <x-tables.cell>
+                                <a href="clients/{{ $client->id }}">
+                                    <x-buttons.neutral-btn>View</x-buttons.neutral-btn>
+                                </a>
+                            </x-tables.cell>
+                        </x-tables.row>
+                    @endforeach
+                @else
+                    <x-tables.empty-table tittle="No Clients" message="Create a client to get started" />
+                @endif
             </x-tables.body>
         </x-tables.table>
     </div>
