@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HolidayController;
 use App\Models\Client;
+use App\Models\Holiday;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -11,9 +12,18 @@ Route::get('/', function () {
         ->latest()
         ->get();
 
+    $holidays = Holiday::whereMonth('date', now()->month)
+        ->latest()
+        ->get();
+
     $sortedClients = $clients->sortBy(function ($client) {
         return Carbon::parse($client->birthday)->day;
     });
+
+    $sortedHolidays = $holidays->sortBy(function ($holiday) {
+        return Carbon::parse($holiday->date)->day;
+    });
+
     return view('app', [
         'clients' =>  $sortedClients->map(function ($client) {
             return (object) [
@@ -22,6 +32,13 @@ Route::get('/', function () {
                 'email' => $client->email,
                 'birthday' =>  Carbon::parse($client->birthday)->format('F, d'),
                 'email_sent' => $client->email_sent,
+            ];
+        }),
+        'holidays' => $sortedHolidays->map(function ($holiday) {
+            return (object) [
+                'id' => $holiday->id,
+                'name' => $holiday->name,
+                'date' => $holiday->date,
             ];
         })
     ]);

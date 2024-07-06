@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Mail\BirthdayEmail;
+use App\Mail\HolidayEmail;
 use App\Models\Client;
+use App\Models\Holiday;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -37,6 +39,7 @@ class SendEmails extends Command
     {
         $today = Carbon::now();
         $this->sendBirthdayEmails($today);
+        $this->sendHolidayEmails($today);
     }
 
     private function sendBirthdayEmails(Carbon $date)
@@ -51,6 +54,25 @@ class SendEmails extends Command
             $client->email_sent = true;
             $client->save();
             $this->info("Sent birthday email to {$client->email}");
+        }
+    }
+
+    private function sendHolidayEmails(Carbon $date)
+    {
+        $holidays = Holiday::whereMonth('date', $date->month)
+        ->whereDay('date', $date->day)
+        ->get();
+
+        foreach($holidays as $holiday)
+        {
+            $clients = Client::latest()->get();
+            foreach($clients as $client)
+            {
+                $emailContent = $holiday->email_template;
+                $holidayName = $holiday->name;
+                Mail::to($client)->send(new HolidayEmail($client, $holidayName, $emailContent));
+                $this->info("Sent {$holiday->name} email to {$client->email}");
+            }
         }
     }
 }

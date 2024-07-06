@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Client;
+use App\Models\Holiday;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Client::factory(10)->create();
+        Client::factory(3)->create();
+        Holiday::factory(5)->create();
     }
 }
