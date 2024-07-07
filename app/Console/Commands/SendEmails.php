@@ -49,29 +49,33 @@ class SendEmails extends Command
             ->where('email_sent', false)
             ->get();
 
+        $perMinute = 10; // Number of emails per minute
+        $sleepTime = 60000000 / $perMinute; // microseconds per email
+
         foreach ($clients as $client) {
-            Mail::to($client)->send(new BirthdayEmail($client));
+            Mail::to($client)->queue(new BirthdayEmail($client));
             $client->email_sent = true;
             $client->save();
             $this->info("Sent birthday email to {$client->email}");
+            usleep($sleepTime);
         }
     }
 
     private function sendHolidayEmails(Carbon $date)
     {
         $holidays = Holiday::whereMonth('date', $date->month)
-        ->whereDay('date', $date->day)
-        ->get();
+            ->whereDay('date', $date->day)
+            ->get();
 
-        foreach($holidays as $holiday)
-        {
+        $perMinute = 10; // Number of emails per minute
+        $sleepTime = 60000000 / $perMinute; // microseconds per email
+
+        foreach ($holidays as $holiday) {
             $clients = Client::latest()->get();
-            foreach($clients as $client)
-            {
-                $emailContent = $holiday->email_template;
-                $holidayName = $holiday->name;
-                Mail::to($client)->send(new HolidayEmail($client, $holidayName, $emailContent));
+            foreach ($clients as $client) {
+                Mail::to($client)->queue(new HolidayEmail($client, $holiday->name, $holiday->email_template));
                 $this->info("Sent {$holiday->name} email to {$client->email}");
+                usleep($sleepTime);
             }
         }
     }
