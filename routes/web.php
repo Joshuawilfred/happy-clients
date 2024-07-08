@@ -39,6 +39,8 @@ Route::get('/', function () {
                 'id' => $holiday->id,
                 'name' => $holiday->name,
                 'date' => $holiday->date,
+                'emails_sent' => $holiday->emails_sent,
+                'recipients_count' => $holiday->recipients_count,
             ];
         })
     ]);
@@ -49,15 +51,15 @@ Route::get('/about', function () {
 });
 
 Route::controller(ClientController::class)->group(function () {
-    Route::get('/clients', 'index');
+    Route::get('/clients', 'index')->name('clients.index');
     Route::get('/clients/create', 'create');
     Route::get('/clients/{client}', 'show');
 
     //protected routes if you may
     Route::post('/clients', 'store');
-    Route::get('/clients/{client}/edit', 'edit')->can('edit', 'client');
+    Route::get('/clients/{client}/edit', 'edit')->name('clients.edit');
     Route::patch('/clients/{client}', 'update');
-    Route::delete('/clients/{client}', 'destroy');
+    Route::delete('/clients/{client}', 'destroy')->name('clients.destroy');
 });
 
 Route::get('/contact', function () {
