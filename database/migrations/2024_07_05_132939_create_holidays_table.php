@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('date');
             $table->json('email_template')->nullable();
+            $table->boolean('emails_sent')->default(false);
+            $table->integer('recipients_count')->default(0);
             $table->timestamps();
         });
     }

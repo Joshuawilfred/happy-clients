@@ -65,6 +65,7 @@ class SendEmails extends Command
     {
         $holidays = Holiday::whereMonth('date', $date->month)
             ->whereDay('date', $date->day)
+            ->where('emails_sent', false)
             ->get();
 
         $perMinute = 10; // Number of emails per minute
@@ -72,11 +73,16 @@ class SendEmails extends Command
 
         foreach ($holidays as $holiday) {
             $clients = Client::latest()->get();
+            $recipientsCount = 0;
             foreach ($clients as $client) {
                 Mail::to($client)->queue(new HolidayEmail($client, $holiday->name, $holiday->email_template));
                 $this->info("Sent {$holiday->name} email to {$client->email}");
                 usleep($sleepTime);
+                $recipientsCount++;
             }
+            $holiday->emails_sent = true;
+            $holiday->recipients_count = $recipientsCount;
+            $holiday->save();
         }
     }
 }

@@ -70,10 +70,11 @@
                                 </x-tables.cell>
 
                                 <x-tables.cell>
-                                    @if (2 + 2 == 0)
-                                        <x-buttons.danger-btn> Not Sent </x-buttons.danger-btn>
+                                    @if ($holiday->emails_sent)
+                                        <x-buttons.success-btn>Sent ({{ $holiday->recipients_count }}
+                                            recipients)</x-buttons.success-btn>
                                     @else
-                                        <x-buttons.success-btn> Sent</x-buttons.success-btn>
+                                        <x-buttons.danger-btn>Not Sent</x-buttons.danger-btn>
                                     @endif
                                 </x-tables.cell>
                             </x-tables.row>
