@@ -6,7 +6,7 @@
 
         <x-forms.divider />
 
-        <x-forms.input name="email_template[title]" label="Email Title" placeholder="Happy New Year" />
+        <x-forms.input name="email_template[title]" label="Email Title" placeholder="eg. Happy New Year" />
         <x-forms.textarea name="email_template[body]" label="Email body"
             placeholder="Proceed with email body, Email head and footer is included automatically" />
 

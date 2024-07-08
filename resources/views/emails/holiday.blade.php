@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>Greetings</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -67,8 +67,9 @@
                     </tr>
                     <tr>
                         <td class="body" style="padding: 40px; text-align: left; font-size: 16px; line-height: 1.6;">
-                            What better time for a special gift? Use this 20% discount for any service in our company
-                            any time before your next birthday:) Enjoy
+                            What better time for a special gift? Get an exclusive 20% discount on your next purchase.
+                            This offer is valid for only 30 days from your special day. Thank you for being a valuable
+                            customer.
                         </td>
                     </tr>
                     <!-- Footer -->

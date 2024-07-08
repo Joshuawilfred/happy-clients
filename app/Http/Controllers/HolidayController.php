@@ -64,7 +64,7 @@ class HolidayController extends Controller
     public function update(Request $request, Holiday $holiday)
     {
         $attributes = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255', 'unique:holidays,name,' . $holiday->name],
             'date' => 'required|date',
             'email_template.title' => 'required|string|max:255',
             'email_template.body' => 'required|string',
