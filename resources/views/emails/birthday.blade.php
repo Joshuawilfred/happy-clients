@@ -46,7 +46,7 @@
                             Hello, <strong style="color: #245FEB">{{ $clientName }}</strong>! <br>
                             We wish you a wonderful day filled with joy and happiness
                             <br><br>
-                            From your friends at Happy Clients, Sincerely wishing you the best of celebrations on this
+                            From your friends at Mail Outreach, Sincerely wishing you the best of celebrations on this
                             wonderful day. May your life be
                             filled with love and adventure. Happy birthday!
                         </td>
@@ -79,7 +79,7 @@
                     <tr>
                         <td class="footer"
                             style="background-color: #020817; padding: 40px; text-align: center; color: #F8FAFC; font-size: 14px;">
-                            Copyright &copy; 2024 | Happy Clients
+                            Copyright &copy; 2024 | Mail Outreach
                         </td>
                     </tr>
                 </table>

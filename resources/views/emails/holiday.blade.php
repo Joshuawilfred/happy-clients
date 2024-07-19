@@ -76,7 +76,7 @@
                     <tr>
                         <td class="footer"
                             style="background-color: #020817; padding: 40px; text-align: center; color: #F8FAFC; font-size: 14px;">
-                            Copyright &copy; 2024 | Happy Clients
+                            Copyright &copy; 2024 | Mail Outreach
                         </td>
                     </tr>
                 </table>
