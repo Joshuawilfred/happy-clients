@@ -56,7 +56,8 @@ class SendEmails extends Command
             Mail::to($client)->queue(new BirthdayEmail($client));
             $client->email_sent = true;
             $client->save();
-            $this->info("Sent birthday email to {$client->email}");
+            $this->info("Sent Birthday email to {$client->email}");
+            Log::info("Sending Birthday email to ".$client->name);
             usleep($sleepTime);
         }
     }
@@ -77,6 +78,7 @@ class SendEmails extends Command
             foreach ($clients as $client) {
                 Mail::to($client)->queue(new HolidayEmail($client, $holiday->name, $holiday->email_template));
                 $this->info("Sent {$holiday->name} email to {$client->email}");
+                Log::info("Sending ".$holiday->name." email to ".$client->name);
                 usleep($sleepTime);
                 $recipientsCount++;
             }
