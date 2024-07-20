@@ -1,4 +1,10 @@
 <x-layouts.main>
+    <div class="bg-gray-100 p-4 text-center mb-8">
+        <a href="https://github.com/Joshuawilfred/mail-outreach" target="_blank" class="text-lg font-semibold text-gray-700 hover:text-gray-900">
+            ⭐ Star this repo on GitHub ⭐
+        </a>
+    </div>
+    
     <section>
         <h2 class="px-3 text-kichwa-cha-habari">Birthday Emails for This Month</h2>
         <div>
