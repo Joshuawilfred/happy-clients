@@ -18,7 +18,7 @@ class HolidayFactory extends Factory
     {
         return [
             'name' => ucfirst($this->faker->word())." Day",
-            'date' => $this->faker->date(),
+            'date' => date('Y-m-d'),
             'email_template' => [
                 'title' => $this->faker->sentence(),
                 'body' => $this->faker->paragraph(),

@@ -19,7 +19,7 @@ class ClientFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'birthday' => fake()->date()
+            'birthday' => date('Y-m-d')
         ];
     }
 }

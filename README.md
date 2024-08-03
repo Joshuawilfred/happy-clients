@@ -10,55 +10,70 @@ Mail Outreach is a tool designed to automate the scheduling and sending of email
 ## Installation
 ### 1. Clone this Repository
 ```shell
-https://github.com/Joshuawilfred/mail-outreach.git
+git clone https://github.com/Joshuawilfred/mail-outreach.git
 ```
-### 2. Install Dependencies
 ```shell
 cd mail-outreach
 ```
+
+### 2. Install Dependencies
 ```shell
 composer install
 npm install
-npm run dev
 ```
 ### 3. Configure Environment
 ```shell
 cp .env.example .env
 ```
-Update the `.env` file with your environment variables, especially mailer settings.
+Optional: Update the `.env` file with your environment variables.
 
-### 4. Database Setup
+### 4. Generate Application Key
+```shell
+php artisan key:generate
+```
+
+### 5. Database Setup
 ```shell
 php artisan migrate --seed
 ```
-### 5. Start Application Server
-```shell
-php artisan serve 
-```
-Open new terminal and start npm server
+This will create SQLite Database and feed it with dummy data
+
+### 6. Start Application Server
 ```shell
 npm run dev
 ```
-## Usage
+Open new terminal and start server
+```shell
+php artisan serve 
+```
+Visit your Application server url e.g [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-### 1. Add New Entries
-Add new `Clients` then `Holidays` entries and set the date to the nearest date and time to test the email functionality.
+## Testing
 
-### 2. Run the Scheduled Commands Manually
+### 1. See pending emails
+```shell
+php artisan schedule:list
+```
+### 2. Sending emails
 ```shell
 php artisan schedule:run
 ```
-Alternatively you can run the custom send emails command directly 
+Alternatively you can send emails using the custom send emails command directly on your terminal
 ```shell
 php artisan app:send-emails
 ```
 ![Demo](resources/images/screenshot.png)
-### 3. Testing Emails
-After Sending emails, you can see them on `storage/logs/laravel.log` <br>
-**Tip:** Configure Email Delivery service like [Mailtrap](https://mailtrap.io/) to your `MAILER` .env To be able to send real time emails and see email views
 
-### 4. Cron Job
-It is advised to create a cron job to run the `schedule:run` command regularly to ensure that emails are sent on time.
+After Sending emails, you can see them on `storage/logs/laravel.log` <br>
+**Tip:** Configure Email Delivery Platform like [Mailtrap](https://mailtrap.io/) to your `MAILER` .env for better email testing
+
+### 3. Automate sending emails
+Create a cron job that will run the `schedule:run` command regularly to ensure that emails are always being sent automatically.
+
+```shell
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+```
+Read more about **Task Scheduling** at [Laravel Docs](https://laravel.com/docs/11.x/scheduling#running-the-scheduler)
 
 ## Important Files & Folders
 - `app/Console/Commands/SendEmails.php`
